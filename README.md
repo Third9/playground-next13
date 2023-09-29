@@ -20,8 +20,3 @@
 - [ ] middleware 사용
 - [ ] route group 사용
 - [ ] next13의 React Server component 사용
-
-refs: 참고할 문서들
-* https://jforj.tistory.com/336
-* https://dev-russel.tistory.com/116
-* https://bysxx.tistory.com/18
