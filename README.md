@@ -11,7 +11,7 @@
 - [ ] next13의 streaming 적용 (loading/suspend)
 - [ ] 상태관리 적용
 - [ ] api 통신 적용
-- [ ] 외부 인증 적용
+- [x] 외부 인증 적용
 - [ ] pwa 적용
 - [ ] emotion 또는 다른 style 모듈 적용
 - [ ] SSR 환경에서의 style 적용
@@ -19,6 +19,7 @@
 - [ ] Layout의 다양한 활용
 - [ ] middleware 사용
 - [ ] route group 사용
+- [ ] next13의 React Server component 사용
 
 refs: 참고할 문서들
 * https://jforj.tistory.com/336
