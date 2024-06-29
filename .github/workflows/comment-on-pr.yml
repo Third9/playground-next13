@@ -41,7 +41,7 @@ jobs:
           path: coverage-ts
           retention-days: 2
           env-url: ARTIFACT-URL
-          compression-level: 9
+          compression-level: 0
 
       - name: Get artifact URL
         id: artifact-url
@@ -57,9 +57,6 @@ jobs:
             // Read result.txt content
             const resultContent = fs.readFileSync('result.txt', 'utf8');
 
-            // Prepare comment body
-            let commentBody = `### Script Execution Result\n\n`;
-            commentBody += `\`\`\`\n${resultContent}\n\`\`\``;
             
             const commentBody = `
               ### ts-coverage Artifacts
