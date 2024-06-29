@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "ts-coverage": "typescript-coverage-report"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.9",
@@ -31,6 +32,7 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
-    "prisma": "^5.4.1"
+    "prisma": "^5.4.1",
+    "typescript-coverage-report": "^1.0.0"
   }
 }
