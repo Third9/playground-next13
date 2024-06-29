@@ -21,11 +21,8 @@ jobs:
       - name: Set Yarn Version
         id: set-version
         run: |
-          yarn set version 4
+          yarn set version berry
           echo "YARN_VERSION=$(yarn -v)" >> $GITHUB_OUTPUT
-
-      - name: Install Yarn
-        run: npm install -g yarn@4
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
