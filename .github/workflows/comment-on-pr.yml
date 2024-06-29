@@ -1,0 +1,56 @@
+name: Comment on PR after running script
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  comment-on-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Install Yarn
+        run: npm install -g yarn@4
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run script and capture output
+        id: run-script
+        run: |
+          echo "Running script..."
+          yarn ts-coverage > result.txt
+          export RESULT=$(grep "specific-info-pattern" result.txt || echo "not-found")
+
+      - name: Comment on PR
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const { context, github } = require('@actions/github');
+
+            const prNumber = context.payload.pull_request.number;
+            const repo = context.payload.repository.full_name;
+
+            // Read result.txt content
+            const resultContent = fs.readFileSync('result.txt', 'utf8');
+
+            // Prepare comment body
+            let commentBody = `### Script Execution Result\n\n`;
+            commentBody += `\`\`\`\n${resultContent}\n\`\`\``;
+
+            // Add a comment to the PR
+            github.issues.createComment({
+              repo: repo,
+              issue_number: prNumber,
+              body: commentBody
+            });
