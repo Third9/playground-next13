@@ -34,19 +34,6 @@ jobs:
           yarn ts-coverage > result.txt
           export RESULT=$(grep "specific-info-pattern" result.txt || echo "not-found")
 
-      - name: Upload ts-coverage as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ts-coverage-report
-          path: coverage-ts
-          retention-days: 2
-          env-url: ARTIFACT-URL
-          compress: false
-
-      - name: Get artifact URL
-        id: artifact-url
-        run: echo "${{ env.ARTIFACT-URL }}"
-
       - name: Comment on PR
         uses: actions/github-script@v7
         with:
@@ -57,12 +44,10 @@ jobs:
             // Read result.txt content
             const resultContent = fs.readFileSync('result.txt', 'utf8');
 
+            // Prepare comment body
+            let commentBody = `### Script Execution Result\n\n`;
+            commentBody += `\`\`\`\n${resultContent}\n\`\`\``;
             
-            const commentBody = `
-              ### ts-coverage Artifacts
-              You can access the coverage artifacts [here](${artifactUrl}).
-            `;
-
             // Add a comment to the PR
             github.rest.issues.createComment({
               owner: context.repo.owner,
