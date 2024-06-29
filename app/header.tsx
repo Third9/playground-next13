@@ -20,6 +20,9 @@ function Header({}: Props) {
             <Link href="/board" className="bg-cyan-200 rounded px-4 py-2">
                 Board
             </Link>
+            <Link href="/virtulized" className="bg-cyan-200 rounded px-4 py-2">
+                Virtualized
+            </Link>
             <Link href="/about" className="bg-cyan-200 rounded px-4 py-2">
                 About
             </Link>
