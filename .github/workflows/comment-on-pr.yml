@@ -2,7 +2,7 @@ name: Comment on PR after running script
 
 on:
   pull_request:
-    types: [opened]
+    types: [opened, synchronize]
 
 jobs:
   comment-on-pr:
@@ -12,16 +12,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
+      - name: Setup Node 18.16.x
         uses: actions/setup-node@v2
         with:
-          node-version: '18'
+          node-version: '18.16.x'
+          cache: 'yarn'
 
-      - name: Install Yarn
-        run: npm install -g yarn@4
+      - name: Set Yarn Version
+        id: set-version
+        run: |
+          yarn set version berry
+          echo "YARN_VERSION=$(yarn -v)" >> $GITHUB_OUTPUT
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install
 
       - name: Run script and capture output
         id: run-script
