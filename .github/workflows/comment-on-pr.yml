@@ -25,7 +25,7 @@ jobs:
           echo "YARN_VERSION=$(yarn -v)" >> $GITHUB_OUTPUT
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install
 
       - name: Run script and capture output
         id: run-script
