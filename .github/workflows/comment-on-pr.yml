@@ -41,7 +41,7 @@ jobs:
           path: coverage-ts
           retention-days: 2
           env-url: ARTIFACT-URL
-          compression-level: 0
+          compress: false
 
       - name: Get artifact URL
         id: artifact-url
