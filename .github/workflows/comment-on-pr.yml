@@ -55,10 +55,6 @@ jobs:
             // Read result.txt content
             const resultContent = fs.readFileSync('result.txt', 'utf8');
 
-            // Prepare comment body
-#            let commentBody = `### Script Execution Result\n\n`;
-#            commentBody += `\`\`\`\n${resultContent}\n\`\`\``;
-            
             const commentBody = `
               ### ts-coverage Artifacts
               You can access the coverage artifacts [here](${artifactUrl}).
