@@ -12,10 +12,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
+      - name: Setup Node 18.16.x
         uses: actions/setup-node@v2
         with:
-          node-version: '18'
+          node-version: '18.16.x'
+          cache: 'yarn'
+
+      - name: Set Yarn Version
+        id: set-version
+        run: |
+          yarn set version 4
+          echo "YARN_VERSION=$(yarn -v)" >> $GITHUB_OUTPUT
 
       - name: Install Yarn
         run: npm install -g yarn@4
