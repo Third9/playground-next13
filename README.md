@@ -11,6 +11,9 @@
 - [ ] next13의 streaming 적용 (loading/suspend)
 - [ ] 상태관리 적용
 - [ ] api 통신 적용
+  - [x] 내부에서의 간단한 Get통신 
+  - [ ] 외부 통신
+  - [ ] RSC를 이용한 DB 접근
 - [x] 외부 인증 적용
 - [ ] pwa 적용
 - [ ] emotion 또는 다른 style 모듈 적용
