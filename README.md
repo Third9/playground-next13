@@ -23,3 +23,5 @@
 - [ ] middleware 사용
 - [ ] route group 사용
 - [ ] next13의 React Server component 사용
+- [ ] yarn to pnpm migration
+- [ ] module federation 환경 구성
