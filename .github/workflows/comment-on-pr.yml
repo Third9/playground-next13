@@ -37,8 +37,6 @@ jobs:
           script: |
             const fs = require('fs');
             const artifactUrl = '${{ steps.artifact-url.outputs.url }}';
-            const { context, github } = require('@actions/github');
-
             // Read result.txt content
             const resultContent = fs.readFileSync('result.txt', 'utf8');
 
