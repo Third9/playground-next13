@@ -1,0 +1,53 @@
+name: Comment on PR after running script
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  comment-on-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install pnpm
+        run: npm install -g pnpm@9
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run script and capture output
+        id: run-script
+        run: |
+          echo "Running script..."
+          pnpm ts-coverage > result.txt
+          export RESULT=$(grep "specific-info-pattern" result.txt || echo "not-found")
+
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const artifactUrl = '${{ steps.artifact-url.outputs.url }}';
+            // Read result.txt content
+            const resultContent = fs.readFileSync('result.txt', 'utf8');
+
+            // Prepare comment body
+            let commentBody = `### Script Execution Result\n\n`;
+            commentBody += `\`\`\`\n${resultContent}\n\`\`\``;
+
+            // Add a comment to the PR
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: commentBody
+            });
