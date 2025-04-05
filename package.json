@@ -8,6 +8,11 @@
     "start": "pnpm run --parallel start",
     "build": "pnpm run --parallel build",
     "dev": "pnpm run --parallel dev",
-    "test": "pnpm run --parallel test"
+    "test": "pnpm run --parallel test",
+    "type-coverage": "typescript-coverage-report"
+  },
+  "devDependencies": {
+    "semantic-ui-react": "^2.1.5",
+    "typescript-coverage-report": "^1.1.1"
   }
 }
